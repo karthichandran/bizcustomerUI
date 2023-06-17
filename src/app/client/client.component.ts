@@ -9,36 +9,15 @@ import * as _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-import { MatStepper } from '@angular/material/stepper';
-import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import * as _moment from 'moment';
 import * as fileSaver from 'file-saver';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ImageCaptureDialogComponent} from 'app/image-capture/image-capture.component';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import { ThemePalette } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
 import { Subject } from 'rxjs';
 import { ReplaySubject } from 'rxjs/internal/ReplaySubject';
 import { takeUntil } from 'rxjs/operators';
-// tslint:disable-next-line:no-duplicate-imports
-//import { default as _rollupMoment } from 'moment';
-//const moment = _rollupMoment || _moment;
-
-// See the Moment.js docs for the meaning of these formats:
-// https://momentjs.com/docs/#/displaying/format/
-//export const MY_FORMATS = {
-//  parse: {
-//    dateInput: 'LL',
-//  },
-//  display: {
-//    dateInput: 'DD-MMM-YYYY',
-//    monthYearLabel: 'MMM YYYY',
-//    dateA11yLabel: 'LL',
-//    monthYearA11yLabel: 'MMMM YYYY',
-//  }
-//};
 
 @Component({
   selector: 'app-client',
@@ -46,10 +25,7 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./client.component.scss'],
   animations: fuseAnimations,
   encapsulation: ViewEncapsulation.None
-  //providers: [
-  //  { provide: DateAdapter,  useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]    },
-  //  { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
-  //],
+ 
 })
 export class ClientComponent implements OnInit, OnDestroy {
   coOwnersForms:any[] = [];
@@ -106,25 +82,25 @@ export class ClientComponent implements OnInit, OnDestroy {
       prospectID: [''],
       prospectPropertyID: [''],
       name: ['', Validators.required],
-      addressPremises: [''],
-      adressLine1: [''],
-      addressLine2: [''],
-      city: ['', Validators.required],
-      stateId: ['', Validators.required],
-      pinCode: ['', Validators.compose([  Validators.required,this.pinCodeValidator(), Validators.maxLength(10)])],
+      // addressPremises: [''],
+      // adressLine1: [''],
+      // addressLine2: [''],
+      // city: ['', Validators.required],
+      // stateId: ['', Validators.required],
+      // pinCode: ['', Validators.compose([  Validators.required,this.pinCodeValidator(), Validators.maxLength(10)])],
        pan: ['', Validators.compose([Validators.required, this.panValidator(), Validators.maxLength(10)])],
       emailID: ['', Validators.email],
-      mobileNo: ['', Validators.compose([Validators.required, , Validators.maxLength(15)])],
+      // mobileNo: ['', Validators.compose([Validators.required, , Validators.maxLength(15)])],
       dateOfBirth: ['', Validators.required],
       isTracesRegistered: [''],
       traces: ['no'],
       tracesPassword: [''],
       share: [''],
-      allowForm16B: [''],
-      form16b: ['yes'],
-      alternateNumber: [''],
-      isd: ['+91'],
-      panBlobId: [''],
+      // allowForm16B: [''],
+      // form16b: ['yes'],
+      // alternateNumber: [''],
+      // isd: ['+91'],
+       panBlobId: [''],
       label: ['Owner'],
       incomeTaxPassword:['', Validators.required]
     });
@@ -136,24 +112,24 @@ export class ClientComponent implements OnInit, OnDestroy {
       prospectID: [''],
       prospectPropertyID: [''],
       name: ['', Validators.required],
-      addressPremises: [''],
-      adressLine1: [''],
-      addressLine2: [''],
-      city: ['', Validators.required],
-      stateId: ['', Validators.required],
-      pinCode: ['', Validators.compose([ Validators.required, this.pinCodeValidator(), Validators.maxLength(10)])],
+      // addressPremises: [''],
+      // adressLine1: [''],
+      // addressLine2: [''],
+      // city: ['', Validators.required],
+      // stateId: ['', Validators.required],
+      // pinCode: ['', Validators.compose([ Validators.required, this.pinCodeValidator(), Validators.maxLength(10)])],
        pan: ['', Validators.compose([Validators.required, this.panValidator(), Validators.maxLength(10)])],
       emailID: ['', Validators.email],
-      mobileNo: ['', Validators.compose([Validators.required, , Validators.maxLength(15)])],
+     // mobileNo: ['', Validators.compose([Validators.required, , Validators.maxLength(15)])],
       dateOfBirth: ['', Validators.required],
       isTracesRegistered: [''],
       traces: ['no'],
       tracesPassword: [''],
       share: [''],
-      allowForm16B: [''],
-      form16b: ['yes'],
-      alternateNumber: [''],
-      isd: ['+91'],
+      // allowForm16B: [''],
+      // form16b: ['yes'],
+      // alternateNumber: [''],
+      // isd: ['+91'],
       panBlobId: [''],
       label: ['Owner'],
       incomeTaxPassword:['', Validators.required]
@@ -183,7 +159,6 @@ export class ClientComponent implements OnInit, OnDestroy {
     { 'header': 'Share %', 'field': 'share', 'type': 'textbox' }
     ];
     this.customerData = [];
-    this.getAllStates();
     this.getAllProperties();
     this.checkDevice();
 
@@ -218,6 +193,22 @@ export class ClientComponent implements OnInit, OnDestroy {
     this._onDestroy.complete();
   }
   addTab() {
+    this.customerform = this._formBuilder.group({
+      prospectID: [''],
+      prospectPropertyID: [''],
+      name: ['', Validators.required],
+       pan: ['', Validators.compose([Validators.required, this.panValidator(), Validators.maxLength(10)])],
+      emailID: ['', Validators.email],
+      dateOfBirth: ['', Validators.required],
+      isTracesRegistered: [''],
+      traces: ['no'],
+      tracesPassword: [''],
+      share: [''],     
+      panBlobId: [''],
+      label: ['Owner'],
+      incomeTaxPassword:['', Validators.required]
+    });
+
     let item = {
       'label': 'Customer',
       ShowCoOwnerOption: true,
@@ -236,19 +227,19 @@ export class ClientComponent implements OnInit, OnDestroy {
       item.ShowCoOwnerOption = false;
       item.ShowMoreCoOwnerOption = true;
     }
-    var existItem = _.clone(this.coOwnersForms[this.coOwnersForms.length - 1].owner);
-    item.owner.get("addressPremises").setValue(existItem.value.addressPremises);
-    item.owner.get("adressLine1").setValue(existItem.value.adressLine1);
-    item.owner.get("addressLine2").setValue(existItem.value.addressLine2);
-    item.owner.get("city").setValue(existItem.value.city);
-    item.owner.get("stateId").setValue(existItem.value.stateId);
-    item.owner.get("pinCode").setValue(existItem.value.pinCode);
-    //item.owner.get("isTracesRegistered").setValue(existItem.value.isTracesRegistered);
-    //item.owner.get("traces").setValue(existItem.value.traces);
-    //item.owner.get("tracesPassword").setValue(existItem.value.tracesPassword);
-    item.owner.get("allowForm16B").setValue(existItem.value.allowForm16B);
-    item.owner.get("form16b").setValue(existItem.value.form16b);
-    item.showAddressClearBtn = true;
+    // var existItem = _.clone(this.coOwnersForms[this.coOwnersForms.length - 1].owner);
+    // item.owner.get("addressPremises").setValue(existItem.value.addressPremises);
+    // item.owner.get("adressLine1").setValue(existItem.value.adressLine1);
+    // item.owner.get("addressLine2").setValue(existItem.value.addressLine2);
+    // item.owner.get("city").setValue(existItem.value.city);
+    // item.owner.get("stateId").setValue(existItem.value.stateId);
+    // item.owner.get("pinCode").setValue(existItem.value.pinCode);
+    // //item.owner.get("isTracesRegistered").setValue(existItem.value.isTracesRegistered);
+    // //item.owner.get("traces").setValue(existItem.value.traces);
+    // //item.owner.get("tracesPassword").setValue(existItem.value.tracesPassword);
+    // item.owner.get("allowForm16B").setValue(existItem.value.allowForm16B);
+    // item.owner.get("form16b").setValue(existItem.value.form16b);
+    // item.showAddressClearBtn = true;
     this.coOwnersForms.push(item);   
     this.shareTab = true;
     var newIndex = this.coOwnersForms.length - 1;
@@ -270,11 +261,7 @@ export class ClientComponent implements OnInit, OnDestroy {
       model.traces = "yes";
     else
       model.traces = "no";
-
-    if (model.allowForm16B)
-      model.form16b = "yes";
-    else
-      model.form16b = "no";
+    
     model.pinCode = isNaN(model.pinCode) ? "" : model.pinCode.trim();
     this.customerform.patchValue(model);
     //Note : this should be enable after complete
@@ -288,24 +275,20 @@ export class ClientComponent implements OnInit, OnDestroy {
       return !ret ? { 'invalidNumber': { value: control.value } } : null;
     };
   }
-  panUploadClick(uploadBtn: Element) {
-    if (this.coOwnersForms[this.currentCustomer].owner.get('pan').value == "") {
-      this.toastr.warning("Please Fill the Pan then upload");
-    } else
-      uploadBtn.dispatchEvent(new MouseEvent('click'));
-    //if (isUndefined(this.panDoc.fileName))
-    //  uploadBtn.dispatchEvent(new MouseEvent('click'));
-    //else
-    //  this.toastr.warning("Please delete the current document then Upload");
-  }
+  // panUploadClick(uploadBtn: Element) {
+  //   if (this.coOwnersForms[this.currentCustomer].owner.get('pan').value == "") {
+  //     this.toastr.warning("Please Fill the Pan then upload");
+  //   } else
+  //     uploadBtn.dispatchEvent(new MouseEvent('click'));
+  // }
 
-  openDialogInMobile(browseBtn: Element) {
-    let isValid = new RegExp('^[A-Za-z]{5}[0-9]{4}[A-Za-z]$').test(this.coOwnersForms[this.currentCustomer].owner.get('pan').value);
-    if (!isValid) {
-      this.toastr.warning("Please Fill the Pan then upload");
-    } else
-      browseBtn.dispatchEvent(new MouseEvent('click'));
-  }
+  // openDialogInMobile(browseBtn: Element) {
+  //   let isValid = new RegExp('^[A-Za-z]{5}[0-9]{4}[A-Za-z]$').test(this.coOwnersForms[this.currentCustomer].owner.get('pan').value);
+  //   if (!isValid) {
+  //     this.toastr.warning("Please Fill the Pan then upload");
+  //   } else
+  //     browseBtn.dispatchEvent(new MouseEvent('click'));
+  // }
 
   getPropertyAndCustomer(prospectPropertyID:number) {
     this.clientService.getCustomerAndProperty(prospectPropertyID).subscribe(res => {
@@ -343,10 +326,10 @@ export class ClientComponent implements OnInit, OnDestroy {
       }
 
       //Note : Please Enable on complete
-      if (!this.isValid(this.customerform.value.panBlobId)) {
-        this.toastr.error("Please upload PAN Document");
-        return;
-      }
+      // if (!this.isValid(this.customerform.value.panBlobId)) {
+      //   this.toastr.error("Please upload PAN Document");
+      //   return;
+      // }
 
       var model = this.customerform.value;
       if (!this.isValid(model.prospectID) || model.prospectID == 0)
@@ -358,17 +341,16 @@ export class ClientComponent implements OnInit, OnDestroy {
       else
         model.isTracesRegistered = false;
 
-      if (model.form16b == 'yes')
-        model.allowForm16B = true;
-      else
-        model.allowForm16B = false;
+      // if (model.form16b == 'yes')
+      //   model.allowForm16B = true;
+      // else
+      //   model.allowForm16B = false;
 
       model.dateOfBirth = moment(model.dateOfBirth).local().format("YYYY-MM-DD");
 
       model.prospectPropertyID = 0;
       model.prospectID = this.clients.length+1;
-      this.clients.push(_.clone( model));
-     // this.customerData = [... this.clients];
+      this.clients.push(_.clone( model));   
       this.clients = [... this.clients];
       if(showAddress)
       this.ShowAddressDetails(model);       
@@ -381,14 +363,14 @@ export class ClientComponent implements OnInit, OnDestroy {
   ShowAddressDetails(model: any) {
     model.prospectID = 0;
     model.name = '';
-    model.mobileNo = '';
+   // model.mobileNo = '';
     model.emailID = '';
     model.pan = '';
     model.dateOfBirth = '';
-    model.form16b = 'yes';
+   // model.form16b = 'yes';
     model.tracesPassword = "";
-    model.alternateNumber = "";
-    model.isd = "+91";
+    // model.alternateNumber = "";
+    // model.isd = "+91";
     this.customerform.reset();
     this.customerform.patchValue(model);
     this.showAddressClearBtn = true;
@@ -413,10 +395,10 @@ export class ClientComponent implements OnInit, OnDestroy {
       else
         obj.isTracesRegistered = false;
 
-      if (obj.form16b == 'yes')
-        obj.allowForm16B = true;
-      else
-        obj.allowForm16B = false;
+      // if (obj.form16b == 'yes')
+      //   obj.allowForm16B = true;
+      // else
+      //   obj.allowForm16B = false;
 
       obj.dateOfBirth = moment(obj.dateOfBirth).local().format("YYYY-MM-DD");
       obj.prospectPropertyID = 0;
@@ -431,7 +413,8 @@ export class ClientComponent implements OnInit, OnDestroy {
     vm.prospectDto = this.clients;
     this.clientService.saveCustomer(vm).subscribe((res) => {
       this.toastr.success("Thanks for submitting your declaration form. We assure you our best services at all times.");     
-      this.clear();
+      //this.clear();
+      window.location.reload();
     }, (e) => {
         this.toastr.error(e.error.error);
     });
@@ -470,10 +453,10 @@ export class ClientComponent implements OnInit, OnDestroy {
     let name = this.customerform.get('name').value;
     let pan = this.customerform.get('pan').value;
     let emailID = this.customerform.get('emailID').value;
-    let mobileNo = this.customerform.get('mobileNo').value;
+  //  let mobileNo = this.customerform.get('mobileNo').value;
     let dateOfBirth = this.customerform.get('dateOfBirth').value;
-    if ((!this.isValid(name) && !this.isValid(pan) && !this.isValid(emailID) && !this.isValid(mobileNo) && !this.isValid(dateOfBirth)) ||
-      (this.isValid(name) && this.isValid(pan) && this.isValid(emailID) && this.isValid(mobileNo) && this.isValid(dateOfBirth))) {
+    if ((!this.isValid(name) && !this.isValid(pan) && !this.isValid(emailID) &&  !this.isValid(dateOfBirth)) ||
+      (this.isValid(name) && this.isValid(pan) && this.isValid(emailID) &&  this.isValid(dateOfBirth))) {
 
       if (this.isValid(pan)) {
 
@@ -482,10 +465,10 @@ export class ClientComponent implements OnInit, OnDestroy {
         else
           this.customerform.value.isTracesRegistered = false;
 
-        if (this.customerform.value.form16b == 'yes')
-          this.customerform.value.allowForm16B = true;
-        else
-          this.customerform.value.allowForm16B = false;;
+        // if (this.customerform.value.form16b == 'yes')
+        //   this.customerform.value.allowForm16B = true;
+        // else
+        //   this.customerform.value.allowForm16B = false;;
 
         if (this.customerform.value.traces == "yes") {
           if (this.customerform.value.tracesPassword == "") {
@@ -571,13 +554,7 @@ export class ClientComponent implements OnInit, OnDestroy {
     var item = this.coOwnersForms[this.coOwnersForms.length - 1].owner;
     item.markAllAsTouched();
     this.propertyForm.markAllAsTouched();
-    //var isValid: boolean = false;
-    //_.filter(item.controls, function (item) {
-    //  if (item.status == "VALID")
-    //    isValid = true;
-    //  else
-    //    isValid = false;
-    //});
+   
     if (item.valid && this.propertyForm.valid) {
 
       var invalidList = _.filter(item.controls, function (ctrl,key) {
@@ -604,10 +581,10 @@ export class ClientComponent implements OnInit, OnDestroy {
       }
 
       //Note : Please Enable on complete
-      if (!this.isValid(this.coOwnersForms[this.currentCustomer].owner.value.panBlobId)) {
-        this.toastr.error("Please upload PAN Document");
-        return false;
-      }
+      // if (!this.isValid(this.coOwnersForms[this.currentCustomer].owner.value.panBlobId)) {
+      //   this.toastr.error("Please upload PAN Document");
+      //   return false;
+      // }
       return true;
     }
     else {
@@ -669,9 +646,7 @@ export class ClientComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         var elm= document.querySelectorAll("input[formControlName='name']").item(0);
         (elm as HTMLElement)?.focus();
-        //var namefield = this.coOwnersForms[this.coOwnersForms.length - 1].owner.get('name');
-        //namefield.nativeElement.focus();
-       // this.nameFieldRef.nativeElement.focus();
+       
       }, 1000);
      
       //this.nameFieldRef.nativeElement.click();
@@ -700,17 +675,17 @@ export class ClientComponent implements OnInit, OnDestroy {
   }
   clearValidator() {
     var item = this.coOwnersForms[this.coOwnersForms.length - 1].owner;
-    item.get("addressPremises").clearValidators();
-    item.get("alternateNumber").clearValidators();
-    item.get("adressLine1").clearValidators();
-    item.get("addressLine2").clearValidators();
+    // item.get("addressPremises").clearValidators();
+    // item.get("alternateNumber").clearValidators();
+    // item.get("adressLine1").clearValidators();
+    // item.get("addressLine2").clearValidators();
     item.get("isTracesRegistered").clearValidators();
     item.get("tracesPassword").clearValidators();
     item.get("traces").clearValidators();
     item.get("share").clearValidators();
-    item.get("isd").clearValidators();
+   // item.get("isd").clearValidators();
     item.get("prospectID").clearValidators();
-    item.get("allowForm16B").clearValidators();
+   // item.get("allowForm16B").clearValidators();
     item.get("incomeTaxPassword").clearValidators();
   }
 
@@ -718,11 +693,11 @@ export class ClientComponent implements OnInit, OnDestroy {
     this.coOwnersForms[this.currentCustomer].showAddressClearBtn = false;
     let client = this.coOwnersForms[this.currentCustomer].owner.value;
     this.customerform.reset();
-    client.adressLine1 = '';
-    client.addressLine2 = '';
-    client.city = '';
-    client.stateId = '';
-    client.pinCode = '';
+    // client.adressLine1 = '';
+    // client.addressLine2 = '';
+    // client.city = '';
+    // client.stateId = '';
+    // client.pinCode = '';
     this.coOwnersForms[this.currentCustomer].owner.patchValue(client);
     Object.keys(this.coOwnersForms[this.currentCustomer].owner.controls).forEach(field => {
       const control = this.coOwnersForms[this.currentCustomer].owner.get(field);
@@ -737,25 +712,25 @@ export class ClientComponent implements OnInit, OnDestroy {
     });
   }
 
-  getAllStates() {
-    this.statesService.getStates().subscribe((response) => {
-      this.states = response;
-    });
-  }
+  // getAllStates() {
+  //   this.statesService.getStates().subscribe((response) => {
+  //     this.states = response;
+  //   });
+  // }
 
-  selectedState(eve) {
-    if (eve.value == 37) {
-      this.coOwnersForms[this.currentCustomer].owner.get('pinCode').setValue("999999");
-    }
-  }
+  // selectedState(eve) {
+  //   if (eve.value == 37) {
+  //     this.coOwnersForms[this.currentCustomer].owner.get('pinCode').setValue("999999");
+  //   }
+  // }
 
-  pinCodeValidator(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-      // if input field is empty return as valid else test
-      const ret = (control.value !== '') ? new RegExp('^[0-9]*$').test(control.value) : true;
-      return !ret ? { 'invalidNumber': { value: control.value } } : null;
-    };
-  }
+  // pinCodeValidator(): ValidatorFn {
+  //   return (control: AbstractControl): { [key: string]: any } | null => {
+  //     // if input field is empty return as valid else test
+  //     const ret = (control.value !== '') ? new RegExp('^[0-9]*$').test(control.value) : true;
+  //     return !ret ? { 'invalidNumber': { value: control.value } } : null;
+  //   };
+  // }
 
   loadCustomerByPan(id: string) {
     if (id.length != 10) {
@@ -770,33 +745,33 @@ export class ClientComponent implements OnInit, OnDestroy {
       return;
     }
   }
-  uploadPan(event) {
-    if (event.target.files && event.target.files.length > 0) {
-      const files = event.target.files[0];
-      let formData = new FormData();
-      formData.append(files.name, files);
-      this.coOwnersForms[this.currentCustomer].panDoc.fileName = files.name;
-      let pan = this.coOwnersForms[this.currentCustomer].owner.get('pan').value;
+  // uploadPan(event) {
+  //   if (event.target.files && event.target.files.length > 0) {
+  //     const files = event.target.files[0];
+  //     let formData = new FormData();
+  //     formData.append(files.name, files);
+  //     this.coOwnersForms[this.currentCustomer].panDoc.fileName = files.name;
+  //     let pan = this.coOwnersForms[this.currentCustomer].owner.get('pan').value;
 
-      //Note : this should be enable on commit
+  //     //Note : this should be enable on commit
 
-      this.clientService.uploadPan(formData, pan).subscribe((eve) => {
-        if (eve.type == HttpEventType.Sent) {
+  //     this.clientService.uploadPan(formData, pan).subscribe((eve) => {
+  //       if (eve.type == HttpEventType.Sent) {
          
-        }
-        if (eve.type == HttpEventType.Response) {
-          this.toastr.success("File Uploaded successfully");
-          this.coOwnersForms[this.currentCustomer].owner.get('panBlobId').setValue(eve.body);
-        }
-      },
-        (err) => { },
-        () => {
-          event.target.value = "";
-          this.loadPanDocument(pan);
-        }
-      );
-    }
-  }
+  //       }
+  //       if (eve.type == HttpEventType.Response) {
+  //         this.toastr.success("File Uploaded successfully");
+  //         this.coOwnersForms[this.currentCustomer].owner.get('panBlobId').setValue(eve.body);
+  //       }
+  //     },
+  //       (err) => { },
+  //       () => {
+  //         event.target.value = "";
+  //         this.loadPanDocument(pan);
+  //       }
+  //     );
+  //   }
+  // }
 
   loadPanDocument(id: string) {
     this.clientService.getUploadedPan(id).subscribe((response) => {
@@ -927,13 +902,7 @@ export class ClientComponent implements OnInit, OnDestroy {
       }
     };
     this.StartCamera();
-    //if (!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
-    //  var self = this;
-    //  navigator.mediaDevices.getUserMedia(constraints).then((x) => this.StartCamera()).catch(() => { this.handleError(this.toastr); });
-    //}
-    //else {
-    //  alert('Sorry, Camera not available.');
-    //}    
+  
   }
 
   tabChanged(eve: MatTabChangeEvent) {
@@ -972,17 +941,8 @@ export class ClientComponent implements OnInit, OnDestroy {
       }
       this.coOwnersForms[this.currentCustomer].Previous = false;
       
-    }
-  
-    //if (eve.index == 1) {
-    //  this.clearHeadercustomerInfo();
-    //  this.search();
-    //  this.propertyDDl = _.clone(this.propertyList);
-    //  this.propertyDDl.splice(0, 0, { 'propertyID': '', 'addressPremises': '' });
-    //  this.showListGird = true;
-    //}
-    //else
-    //  this.showListGird = false;;
+    } 
+   
   }
   NavigateToPreviousTab() {
     this.selectedTab = this.currentCustomer - 1; 
